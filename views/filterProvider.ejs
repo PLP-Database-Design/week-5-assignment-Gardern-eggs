@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients</title>
+</head>
+<body>
+    <h1>Search Patients by First Name</h1>
+    <form action="/filterProvider" method="GET">
+        <input type="text" name="provider_specialty" placeholder="Enter spevialty" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <% if (results.length > 0) { %>
+    <h2>Providers with specialty: <%= results[0]?.provider_specialty %></h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th> 
+                <th>provider specialty</th>
+                <th>date_Joined</th>             
+                
+               
+            </tr>
+        </thead>
+        <tbody>
+            <% results.forEach(provider => { %>
+                <tr>
+                    <td><%= provider.id %></td>
+                    <td><%= provider.first_name %></td>
+                    <td><%= provider.last_name %></td>
+                    <td><%= provider.email %></td>
+                    <td><%= provider.phone %></td>
+                    <td><%= provider.provider_specialty %></td>
+                    <td><%= provider.date_joined %></td>
+                    
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <% } else { %> <!-- Fallback if no results are found -->
+        <h2>No patients found with the given first name.</h2>
+       
+    <% } %>
+</body>
+</html>
