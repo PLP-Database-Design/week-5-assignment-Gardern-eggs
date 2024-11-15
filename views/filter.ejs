@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patients</title>
+</head>
+<body>
+    <h1>Search Patients by First Name</h1>
+    <form action="/filter" method="GET">
+        <input type="text" name="first_name" placeholder="Enter first name" required>
+        <button type="submit">Search</button>
+    </form>
+
+    <% if (results.length > 0) { %>
+    <h2>Patients with First Name: <%= results[0]?.first_name %></h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% results.forEach(patient => { %>
+                <tr>
+                    <td><%= patient.id %></td>
+                    <td><%= patient.first_name %></td>
+                    <td><%= patient.last_name %></td>
+                    <td><%= patient.email %></td>
+                    <td><%= patient.phone %></td>
+                    <td><%= patient.date_of_birth %></td>
+                    <td><%= patient.gender ? 'Male' : 'Female' %></td>
+                    <td><%= patient.address %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <% } else { %> <!-- Fallback if no results are found -->
+        <h2>No patients found with the given first name.</h2>
+       
+    <% } %>
+</body>
+</html>
